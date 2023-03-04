@@ -1,0 +1,7 @@
+{
+  "name": "ViCarGo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
