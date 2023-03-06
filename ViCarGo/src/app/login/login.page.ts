@@ -11,6 +11,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class LoginPage implements OnInit {
   credentials: FormGroup;
+  showSignInButtons: boolean = false;
 
   constructor(private authService: AuthService,
               private loadingController: LoadingController,
@@ -76,5 +77,15 @@ export class LoginPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  showSignInButtonsOnClick() {
+    this.showSignInButtons = true;
+    const descriptiveText = document.getElementById('text-container') as HTMLDivElement;
+    const backgroundImage = document.getElementById('background-image') as HTMLImageElement;
+    const formDiv = document.getElementById('form-container') as HTMLDivElement
+    descriptiveText.classList.toggle('hidden');
+    backgroundImage.classList.toggle('blurred');
+    formDiv.classList.toggle('display');
   }
 }
