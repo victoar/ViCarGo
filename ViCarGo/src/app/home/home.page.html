@@ -6,8 +6,8 @@
         <p class="location-text">{{currentLocation}}</p>
       </div>
       <div class="user-profile-image">
-        <div class="profile-container">
-          <img src="assets/images/home-page/default-profile.png">
+        <div class="profile-container" (click)="navigateToUserProfile()">
+          <img [style]="user && user.profileImage ? 'transform: scale(1)' : 'transform: scale(0.7)'" [src]="user && user.profileImage ? user.profileImage : 'assets/images/home-page/default-profile.png'">
         </div>
       </div>
     </div>
@@ -18,16 +18,16 @@
   </div>
 
   <div class="home-page-main-section-container">
-    <div class="search-bar-container">
+    <div class="search-bar-container" (click)="navigateToSearchPage()">
       <img src="assets/images/icons/search-icon.svg" class="search-bar-icon">
       <p>Search vehicle...</p>
     </div>
 
     <div class="top-brands-container">
       <p class="section-title">Top Brands</p>
-      <p class="section-click">See all</p>
+<!--      <p class="section-click">See all</p>-->
       <div class="scroll-wrapper">
-        <div (click)="onClick()" *ngFor="let item of topBrandsList" class="scroll-item brand-list-item">
+        <div (click)="navigateToSearchPageBrandFiltered(item)" *ngFor="let item of topBrandsList" class="scroll-item brand-list-item">
           <img [src]="'./assets/images/car-brands-icons/' + item + '.png'">
         </div>
       </div>
@@ -35,10 +35,17 @@
 
     <div class="nearby-cars-container">
       <p class="section-title">Available Near You</p>
-      <p class="section-click">See all</p>
+      <p class="section-click" (click)="navigateToSearchPageUsingUserLocation()">See all</p>
       <div class="scroll-wrapper">
-        <app-car-item class="scroll-item" [carItem]="carMock1" (click)="presentDetailsModal(carMock1)"></app-car-item>
-        <app-car-item class="scroll-item" [carItem]="carMock2" (click)="presentDetailsModal(carMock2)"></app-car-item>
+        <app-car-item class="scroll-item" *ngIf="carModels.length === 0 && !isLoading" [carItem]="carMock1" [isMock]="true"></app-car-item>
+        <app-car-item class="scroll-item" *ngIf="carModels.length === 0 && !isLoading" [carItem]="carMock2" [isMock]="true"></app-car-item>
+        <app-skeleton-text-car-item class="scroll-item" *ngIf="isLoading"></app-skeleton-text-car-item>
+        <app-skeleton-text-car-item class="scroll-item" *ngIf="isLoading"></app-skeleton-text-car-item>
+        <ng-container *ngIf="carModels.length > 0 && !isLoading">
+          <app-car-item class="scroll-item" *ngFor="let car of carModels"
+                        [carItem]="car"
+                        (click)="presentDetailsModal(car)"></app-car-item>
+        </ng-container>
       </div>
     </div>
 

@@ -1,0 +1,13 @@
+.empty-array-container div{
+  height: 110px;
+  top: calc(50% - 55px);
+
+  img{
+    width: 180px;
+  }
+}
+
+ion-avatar{
+  --border-radius: 10px;
+  border: 1px solid gray;
+}

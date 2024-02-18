@@ -3,17 +3,18 @@ import {AuthService} from "../services/auth.service";
 import {AlertController, LoadingController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {UserService} from "../services/user.service";
+// import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  animations: [trigger('buttonTransition', [
-    state('void', style({ opacity: 0, transform: 'translateX(100%)' })),
-    transition(':enter', animate('300ms ease-in-out')),
-    transition(':leave', animate('300ms ease-in-out'))
-  ])]
+  // animations: [trigger('buttonTransition', [
+  //   state('void', style({ opacity: 0, transform: 'translateX(100%)' })),
+  //   transition(':enter', animate('300ms ease-in-out')),
+  //   transition(':leave', animate('300ms ease-in-out'))
+  // ])]
 })
 export class LoginPage implements OnInit {
   credentials: FormGroup;
@@ -26,7 +27,8 @@ export class LoginPage implements OnInit {
               private loadingController: LoadingController,
               private router: Router,
               private formBuilder: FormBuilder,
-              private alertController: AlertController) { }
+              private alertController: AlertController,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.initFormGroup();
@@ -64,12 +66,17 @@ export class LoginPage implements OnInit {
     await this.authService.register(this.credentials.value)
       .then((user) => {
         loading.dismiss();
-        console.log(user);
+        this.userService.setCurrentUser(this.authService.getId());
         this.router.navigate(['landing'], {replaceUrl: true});
       })
       .catch((error) => {
         loading.dismiss();
-        this.showAlert('Registration failed', 'Please try again!');
+        console.log(error.message);
+        if(error.message.includes('email-already-in-use')) {
+          this.showAlert('Registration failed', 'There is already an existing account with these credentials!');
+        } else {
+          this.showAlert('Registration failed', 'Please try again!');
+        }
       })
   }
 
@@ -81,6 +88,7 @@ export class LoginPage implements OnInit {
       .then((user) => {
         loading.dismiss();
         console.log(user);
+        this.userService.setCurrentUser(this.authService.getId());
         this.router.navigate(['landing'], {replaceUrl: true});
       })
       .catch((error) => {
@@ -109,10 +117,14 @@ export class LoginPage implements OnInit {
   }
 
   showRegisterForm() {
+    // this.credentials.get('lastName').enable();
+    // this.credentials.get('firstName').enable();
     this.registerFormVisible = true;
   }
 
   cancelRegister() {
     this.registerFormVisible = false;
+    // this.credentials.get('lastName').disable();
+    // this.credentials.get('firstName').disable();
   }
 }

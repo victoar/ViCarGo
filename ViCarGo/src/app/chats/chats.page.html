@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="(chatRooms | async) as rooms">
+
+  <app-empty-array-item *ngIf="rooms?.length === 0"
+                        [isBigImage] = "true"
+                        [displayText]="'No chats available'"
+                        [imagePath]="'assets/images/icons/empty-chats-icon.png'"></app-empty-array-item>
+
+  <ion-list *ngIf="rooms?.length > 0">
+
+    <ion-list-header class="ion-padding-bottom" color="light">
+      RECENT CHATS
+    </ion-list-header>
+
+    <ion-item
+      *ngFor="let item of rooms"
+      (click)="getChat(item)"
+      [detail]="true">
+      <ng-container *ngIf="(item?.user | async) as user">
+        <ion-avatar slot="start">
+          <img [style]="getUser(user) && getUser(user)?.profileImage ? 'transform: scale(1)' : 'transform: scale(0.7)'"
+               [src]="getUser(user) && getUser(user)?.profileImage ? getUser(user)?.profileImage : 'assets/images/home-page/default-profile.png'">
+        </ion-avatar>
+        <ion-label>
+          {{getUser(user)?.firstName + " " + getUser(user)?.lastName}}
+          <p>
+            <ion-text>
+              {{item?.lastMessage}}
+            </ion-text>
+          </p>
+        </ion-label>
+         <ion-text slot="end" color="medium">{{getLastUpdate(item)}}</ion-text>
+      </ng-container>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

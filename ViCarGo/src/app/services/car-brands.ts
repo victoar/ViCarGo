@@ -48,6 +48,7 @@ export const CAR_BRANDS: CarBrand[] = [
   new CarBrand("Porsche", ["911", "Boxster", "Cayenne", "Cayman", "Macan", "Panamera"]),
   new CarBrand("Ram", ["1500", "2500", "3500"]),
   new CarBrand("Rolls-Royce", ["Cullinan", "Dawn", "Ghost", "Wraith"]),
+  new CarBrand("Skoda", ["Citigo", "Enyaq", "Kamiq", "Karoq", "Kodiak", "Octavia", "Rapid", "Superb", "Yeti"]),
   new CarBrand("Subaru", ["Ascent", "BRZ", "Crosstrek", "Forester", "Impreza", "Legacy", "Outback", "WRX"]),
   new CarBrand("Tesla", ["Model 3", "Model S", "Model X", "Model Y"]),
   new CarBrand("Toyota", ["4Runner", "Avalon", "C-HR", "Camry", "Corolla", "GR Supra", "Highlander", "Land Cruiser", "Mirai", "Prius", "RAV4", "Sequoia", "Sienna", "Tacoma", "Tundra", "Venza", "Yaris"]),

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/landing/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Vehicles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-content *ngIf="carsList.length > 0; else displayMessage">
+
+      <app-large-car-item *ngFor="let car of carsList" [carItem]="car" (click)="presentSaveCarModal(car)"></app-large-car-item>
+
+  </ion-content>
+
+  <ng-template #displayMessage>
+    <app-empty-array-item [displayText]="'No cars available'" [imagePath]="'assets/images/home-page/sample-car-when-empty.png'"></app-empty-array-item>
+  </ng-template>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentSaveCarModal(null)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

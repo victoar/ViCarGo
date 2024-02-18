@@ -28,11 +28,37 @@
 :root {
   --primary-color: #0486C4;
   --secondary-color: #f3f5fb;
-  --ion-safe-area-top: env(safe-area-inset-top);
-  --ion-safe-area-bottom: env(safe-area-inset-bottom);
-  --ion-safe-area-left: env(safe-area-inset-left);
-  --ion-safe-area-right: env(safe-area-inset-right);
   --primary-text: Roboto, serif;
+}
+
+ion-tab-button {
+  --color-selected: var(--primary-color);
+}
+
+ion-back-button{
+  --color: var(--primary-color)
+}
+
+ion-fab-button{
+  --background: var(--primary-color);
+  --background-hover: var(--primary-color);
+  --background-activated: var(--primary-color);
+  --background-focused: var(--primary-color);
+}
+
+ion-segment{
+  border-radius: 0;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  color: var(--primary-color);
+
+  ion-segment-button{
+    --color-checked: var(--primary-color);
+  }
+}
+
+.ion-item-no-border{
+  --inner-border-width: 0;
 }
 
 .centered-blur-modal {
@@ -69,6 +95,13 @@
 .stick-to-left{
   float: left;
 }
+
+//.pac-container{
+//  width: 100% !important;
+//  position: absolute !important;
+//  top: 48px !important;
+//  left: 0 !important;
+//}
 //.car-details-modal {
 //  --height: 90%; /* set the modal height */
 //  --top: calc(100% - var(--height)); /* calculate the top position based on height */

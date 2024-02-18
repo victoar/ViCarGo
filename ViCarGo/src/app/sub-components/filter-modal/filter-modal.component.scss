@@ -1,0 +1,39 @@
+.filter-container-android{
+  height: 850px;
+}
+
+.filter-container-ios{
+  height: 740px;
+}
+
+.price-filter-container{
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+ion-range{
+  padding: 0 14px !important;
+  --knob-background: var(--primary-color);
+  --bar-background-active: var(--primary-color);
+  --bar-background: rgba(4, 134, 196, 0.5);
+}
+
+.submit-filters-button{
+  background-color: var(--primary-color);
+  width: 170px;
+  height: 45px;
+  border-radius: 25px;
+  margin: 12px 0 0 calc(50% - 85px);
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+ion-input{
+  --border-color: var(--primary-color) !important;
+}
+
+ion-content {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}

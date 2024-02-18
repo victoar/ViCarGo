@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/landing/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile-image-container" (click)="onProfileContainerClick()">
+    <input type="file" accept="image/png, image/jpeg" id="profileImageInput" name="profileImageInput" (change)="onProfileImageSelected($event)" style="display: none;">
+    <div class="user-profile-image">
+      <div class="profile-container">
+        <img [style]="user && user.profileImage ? 'transform: scale(1)' : 'transform: scale(0.7)'" [src]="user && user.profileImage ? user.profileImage : 'assets/images/home-page/default-profile.png'">
+      </div>
+      <p>{{user && user.profileImage ? "Change profile picture" : "Choose a profile picture"}}</p>
+    </div>
+  </div>
+
+  <div class="form-container" [formGroup]="profileForm">
+<!--    <ion-item>-->
+<!--      <ion-icon name="alert-circle-outline"></ion-icon>-->
+<!--      <ion-label>Please fill in the form the way it is written in your drivers license</ion-label>-->
+<!--    </ion-item>-->
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input formControlName="firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input formControlName="lastName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Phone Number</ion-label>
+      <ion-input type="tel" formControlName="phoneNumber"></ion-input>
+    </ion-item>
+    <ion-item id="open-date-modal">
+      <ion-label position="floating">Birthday</ion-label>
+      <ion-input formControlName="birthday"></ion-input>
+    </ion-item>
+
+    <ion-modal class="centered-blur-modal" trigger="open-date-modal">
+      <ng-template>
+        <ion-content>
+          <ion-datetime
+            #datetime
+            presentation="date"
+            [value]="dateValue"
+            size="cover"
+            (ionChange)="dateChanged(datetime.value)"
+            [max]="maxDate"
+            show-default-buttons="true">
+          </ion-datetime>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <div class="indentation-container">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      {{validationMessage}}
+    </div>
+    <div class="drivers-license-validation-container">
+      <img [src]="isUserValidated ? 'assets/images/icons/check-icon-blue.svg' : 'assets/images/icons/add-icon.svg'" (click)="takePhoto()">
+    </div>
+
+    <ion-button style="margin-top: 24px" expand="block" [disabled]="!profileForm.valid" (click)="onSubmit()">Save</ion-button>
+  </div>
+</ion-content>

@@ -17,6 +17,22 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
+    path: 'search-cars',
+    loadChildren: () => import('./search-cars/search-cars.module').then( m => m.SearchCarsPageModule)
+  },
+  {
+    path: 'favorites',
+    loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
+  },
+  {
+    path: 'chats',
+    loadChildren: () => import('./chats/chats.module').then( m => m.ChatsPageModule)
+  },
+  {
+    path: 'chat-room',
+    loadChildren: () => import('./chats/chat-room/chat-room.module').then( m => m.ChatRoomPageModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

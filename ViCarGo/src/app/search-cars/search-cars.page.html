@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/landing"></ion-back-button>
+    </ion-buttons>
+    <ion-item class="location-input-item">
+      <input #locationInput
+             class="location-input"
+             ngx-google-places-autocomplete
+             [options]="options"
+             (onAddressChange)="handleAddressChange($event)"/>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="floating-buttons-container">
+    <button class="filter-button" (click)="openFilterModal()">
+      <ion-icon slot="start" name="funnel-outline"></ion-icon>
+      Filter
+    </button>
+  </div>
+
+<!--  <ion-fab-button>-->
+<!--    eiii-->
+<!--  </ion-fab-button>-->
+
+  <app-skeleton-text-large-car-item *ngIf="isLoading"></app-skeleton-text-large-car-item>
+
+  <app-empty-array-item *ngIf="filteredCars.length === 0 && !isLoading"
+                        [displayText]="'No results found'"
+                        [imagePath]="'assets/images/icons/search-icon.svg'"
+                        [isBigImage]="true">
+  </app-empty-array-item>
+
+  <div class="cars-container" *ngIf="filteredCars.length > 0 && !isLoading">
+    <app-large-car-item *ngFor="let carModel of filteredCars"
+                        [carItem]="carModel"
+                        [showFavoriteButton]="true"
+                        [isFavorite]="carModel.isFavorite"
+                        [distanceFromUser]="carModel.distance"
+                        (click)="openCarDetailsPopup(carModel)">
+    </app-large-car-item>
+  </div>
+</ion-content>

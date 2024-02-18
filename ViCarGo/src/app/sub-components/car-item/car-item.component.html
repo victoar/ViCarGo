@@ -1,0 +1,19 @@
+<div class="car-item-container">
+  <div class="car-image-container">
+    <img *ngIf="!isMock" [src]="carItem.carImages && carItem.carImages.length > 0 ? carItem.carImages[0] : 'assets/images/home-page/default-car-image.png'">
+    <ng-container *ngIf="isMock">
+        <img style="filter: blur(5px);" [src]="carItem.imagePath" alt="No cars available">
+        <div class="overlay-text">No cars available near you</div>
+    </ng-container>
+  </div>
+
+  <h5>{{carItem.brand + " " + carItem.model}}</h5>
+  <div class="details-container">
+    <ng-container *ngIf="carItem.reviewRating">
+      <img class="review-star-icon" src="assets/images/icons/star.png">
+      <p class="stick-to-left">{{(carItem.reviewRating / carItem.reviewNumber).toFixed(1)}}</p>
+    </ng-container>
+    <p *ngIf="!carItem.reviewRating" style="margin-left: 0" class="stick-to-left">No reviews yet</p>
+    <p class="stick-to-right">{{carItem.price + "€" + "/day"}}</p>
+  </div>
+</div>

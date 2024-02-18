@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add new vehicle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div [formGroup]="carForm" class="form-container">
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Specification</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Make</ion-label>
+          <ion-select formControlName="brand" (ionChange)="onCarBrandChange()">
+            <ion-select-option *ngFor="let carBrand of carBrands" [value]="carBrand.name">{{carBrand.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Model</ion-label>
+          <ion-select formControlName="model">
+            <ion-select-option *ngFor="let model of models" [value]="model">{{model}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Year</ion-label>
+          <ion-select formControlName="year">
+            <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Transmission</ion-label>
+          <ion-select formControlName="transmission">
+            <ion-select-option *ngFor="let transmission of transmissionTypes" [value]="transmission">{{transmission}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Info</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">License Plate</ion-label>
+          <ion-input placeholder="e.g. CJ-99-VIC" type="text" formControlName="licensePlate"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Passengers</ion-label>
+          <ion-input type="number" formControlName="passengers" min="0" class="ion-text-end"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Power</ion-label>
+          <ion-input placeholder="hp" type="number" formControlName="horsepower" min="0" class="ion-text-end"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Top Speed</ion-label>
+          <ion-input placeholder="km/h" type="number" formControlName="speed" min="0" class="ion-text-end"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Avg. Consumption</ion-label>
+          <ion-input placeholder="l/100km" type="number" formControlName="consumption" min="0" class="ion-text-end"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Additional Info</ion-label>
+          <ion-input type="text" formControlName="additionalInfo"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Pricing</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Price</ion-label>
+          <ion-input placeholder="per day" type="number" formControlName="price" min="0" class="ion-text-end"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Location</ion-card-title>
+      </ion-card-header>
+      <ion-card-content [style]="isEditMode ? 'padding-bottom: 0' : ''">
+        <ion-item>
+          <input *ngIf="changeLocationPressed"
+                 class="location-input" ngx-google-places-autocomplete
+                 [options]="options"
+                 (onAddressChange)="handleAddressChange($event)"/>
+          <ion-input *ngIf="!changeLocationPressed"
+                     readonly="true"
+                     formControlName="locationAddress"></ion-input>
+        </ion-item>
+      </ion-card-content>
+
+      <ion-button *ngIf="isEditMode" [disabled]="!carForm.get('locationAddress').valid || changeLocationPressed" fill="clear"
+                  (click)="changeLocationButtonPressed()">Edit location</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Showcase</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngIf="carImages.length === 0" class="ion-padding" (click)="onShowcaseContainerClick()">
+          <input type="file" accept="image/png, image/jpeg" id="carImagesInput" multiple (change)="carImagesChanged($event)" style="display: none;">
+          <img class="add-icon-image" src="assets/images/icons/add-icon.svg" alt="add-icon">
+<!--          <br>-->
+<!--          <p>You can select up to 8 images</p>-->
+<!--          <p>The first chosen image will be the main one</p>-->
+        </div>
+        <div *ngIf="carImages.length > 0" class="image-container">
+          <div *ngFor="let imageUrl of carImages; let i = index" class="image-item"
+               [style]="i === 0 ? 'border: 2px solid #0486C4' : ''">
+            <img [src]="imageUrl" alt="Uploaded Image">
+          </div>
+        </div>
+        <p *ngIf="carImages.length > 0" style="margin-top: 10px">This will be the main image in your rental list</p>
+        <p *ngIf="hasCarImagesChanged" style="margin-top: 5px">Don't forget to save the changes</p>
+      </ion-card-content>
+    </ion-card>
+
+    <button class="save-button" [disabled]="!carForm.valid" (click)="onSubmit()">Save</button>
+  </div>
+
+<!--  <ion-button (click)="closeModal()">-->
+<!--    asd-->
+<!--  </ion-button>-->
+</ion-content>

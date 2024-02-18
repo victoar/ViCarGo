@@ -1,0 +1,67 @@
+.location-input{
+  border: none;
+  width: 100%;
+  outline: none;
+  background-color: inherit;
+  //border-bottom: var(--primary-color);
+}
+
+.location-input-item{
+  --background: transparent !important;
+  --border-color: var(--primary-color) !important;
+  --inner-border-width: 0 0 2px 0 !important;
+}
+
+.pac-container {
+  position: absolute !important;
+  width: 100% !important;
+  top: 48px !important;
+  left: 0 !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom: 2px solid var(--primary-color) !important;
+  background-color: var(--ion-toolbar-background, var(--ion-color-step-50, #f7f7f7)) !important;
+}
+
+ion-toolbar{
+  --border-width: 0 !important;
+}
+
+.floating-buttons-container{
+  position: fixed;
+  width: 120px;
+  left: calc(50% - 60px);
+  bottom: 10px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  height: 45px;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  overflow: hidden;
+  border: 2px solid var(--secondary-color);
+
+  button{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    color: var(--secondary-color);
+
+    ion-icon{
+      margin: 5px;
+    }
+  }
+}
+
+.cars-container{
+  position: relative;
+  top: 15px;
+  height: auto;
+  width: 100%;
+  margin-bottom: 40px;
+  //background-color: #2fdf75;
+}

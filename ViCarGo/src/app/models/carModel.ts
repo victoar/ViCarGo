@@ -1,9 +1,10 @@
 export interface CarModel {
+  id: string;
   imagePath: string;
   brand: string;
   model: string;
   reviewRating: number;
-  tripsNumber: number
+  reviewNumber: number
   price: number;
   year: number;
   transmission: string;
@@ -14,4 +15,10 @@ export interface CarModel {
   consumption: number;
   additionalInfo: string;
   licensePlate: string;
+  ownerId: string;
+  carImages: string[];
+  locationLongitude: number;
+  locationLatitude: number;
+  locationAddress: string;
+  locationGeohash: string;
 }

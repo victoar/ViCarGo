@@ -49,12 +49,12 @@
   </div>
 
   <div class="login-page-buttons-container">
-    <button *ngIf="showSignInButtons" class="login-button" (click)="login()">Login</button>
-    <button *ngIf="showSignInButtons" class="register-button" (click)="showRegisterForm()">Register</button>
+    <button *ngIf="showSignInButtons && !registerFormVisible" class="login-button" (click)="login()">Login</button>
+    <button *ngIf="showSignInButtons && !registerFormVisible" class="register-button" (click)="showRegisterForm()">Register</button>
     <button *ngIf="!showSignInButtons" class="go-ahead-button" (click)="showSignInButtonsOnClick()">Let's go</button>
   </div>
 
-  <div [@buttonTransition]="buttonTransitionState" *ngIf="registerFormVisible">
+  <div class="login-page-buttons-container" [@buttonTransition]="buttonTransitionState" *ngIf="registerFormVisible">
     <button class="login-button" (click)="cancelRegister()">Back to Login</button>
     <button class="register-button" (click)="register()">Sign in</button>
   </div>

@@ -1,0 +1,25 @@
+img{
+  width: 40px;
+  height: 40px;
+}
+
+.star-rating{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+#close-button{
+  --color: var(--primary-color);
+}
+
+#submit-button{
+  --background: var(--primary-color);
+  --background-hover: var(--primary-color);
+  --background-activated: var(--primary-color);
+  --background-focused: var(--primary-color);
+  margin-top: 20px;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}

@@ -1,0 +1,32 @@
+<ion-card>
+  <div *ngIf="!showFavoriteButton" class="delete-overlay" (click)="deleteCar($event)">
+    <img src="assets/images/icons/close-icon.png">
+  </div>
+  <div *ngIf="showFavoriteButton" class="delete-overlay" (click)="favoritesButtonClicked($event)">
+    <img *ngIf="!isFavorite" src="assets/images/icons/empty-heart.png">
+    <img *ngIf="isFavorite" src="assets/images/icons/filled-heart.png">
+  </div>
+  <img class="large-car-item-image" alt="car-img" (load)="handleImageLoad()"
+       [src]="carItem.carImages && carItem.carImages.length > 0 ? carItem.carImages[0] : 'assets/images/home-page/default-car-image.png'"/>
+  <ion-card-header>
+    <ion-card-subtitle>{{carItem.price + "€" + "/day"}}</ion-card-subtitle>
+    <ion-card-title>{{carItem.brand + " " + carItem.model}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <hr style="background: grey; margin-bottom: 0">
+    <div *ngIf="distanceFromUser !== undefined" class="stick-to-left reviews-container">
+      {{distanceDisplayed + distanceMeasurement + ' away'}}
+    </div>
+    <div class="stick-to-right reviews-container">
+      <div *ngIf="carItem.reviewRating; else noReviews">
+        <img class="review-star-icon" src="assets/images/icons/star.png">
+        <p class="stick-to-left reviews-text-style">{{(carItem.reviewRating / carItem.reviewNumber).toFixed(1)}}</p>
+        <p class="stick-to-left reviews-text-style secondary-text">{{"(" + carItem.reviewNumber + " reviews)"}}</p>
+      </div>
+      <ng-template #noReviews>
+        <p class="reviews-text-style">No reviews yet</p>
+      </ng-template>
+    </div>
+  </ion-card-content>
+</ion-card>
