@@ -29,7 +29,9 @@ The architecture of a peer-to-peer car sharing mobile application involves sever
 
 It should be mentioned that a small part of the logic involving driving license validation is separately implemented in Python language and accessed with the help of an HTTP POST request.
 
-![system-architecture (1)](https://github.com/victoar/ViCarGo/assets/72073154/ec3df194-99db-49ff-b8c4-15a797294524)
+<p align="center">
+  <img src="https://github.com/victoar/ViCarGo/assets/72073154/ec3df194-99db-49ff-b8c4-15a797294524" alt="system-architecture" width="300" height="200">
+</p>
 
 ## Client side
 
@@ -41,6 +43,7 @@ The architecture of this client-side application is organized into services, sub
 
 In the context of developing a mobile application, the server-side implementation plays a crucial role in ensuring the seamless operation and efficient management of the application’s data. The server-side can be either a traditional back-end server, which is an application that can be written in a range of languages (Java, PHP, Python, Go, etc.), or a back-end as a service (BaaS) platform. The most popular providers when it comes to BaaS are: Google (Firebase), Amazon (AWS Amplify), built.io, etc.
 
+# More info
 
 If you would like to know more about my Bachelor Thesis, I invite you to open the 'Diploma-thesis.pdf' that is present in this git repository or feel free to contact me on [LinkedIn](https://www.linkedin.com/in/victor-stefan-iacob-943bb1182/).
 
