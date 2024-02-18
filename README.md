@@ -2,6 +2,8 @@
 
 Traffic congestion has become a major concern in today’s society, and figuring out the best way to tackle this issue still remains a big challenge. A solution to combat it is presented in this thesis which focuses on the development of a mobile application centered around the concept of ’Peer-to-peer car sharing’. The application aims to provide a platform where individuals can share their personal vehicles for rental purposes, therefore optimizing existing transportation resources and reducing the number of cars on the road. The mobile application utilizes modern technologies and user-friendly interfaces in order to create a smooth interaction within the ’sharing’ community. By exploiting the power of smartphones connectivity and location services, users can easily find the most suitable car for their preferences.
 
+<br>
+
 # Introduction
 ## Mobile Application Overview
 
@@ -23,6 +25,8 @@ Looking ahead, the thesis contemplates potential enhancements to features and us
 
 In conclusion, this research makes a significant contribution to the field of sustainable transportation. By advocating for a more efficient utilization of existing transportation resources, the 'Peer-to-peer car sharing' concept emerges as a reasonable and viable solution to alleviate traffic congestion. The mobile application, with its innovative approach, stands as a testament to the ongoing efforts to promote sustainable and effective transportation methods.
 
+<br>
+
 # Architecture of Peer-to-peer Car Sharing Mobile Application
 
 The architecture of a peer-to-peer car sharing mobile application involves several components working together to provide a seamless and efficient user experience. In this case, the application was developed using the Ionic framework for the frontend, while Firebase was utilized as a backend substitute. This choice was made due to the inherent advantages of Firebase, such as its speed, security, and reliability.
@@ -42,6 +46,8 @@ The architecture of this client-side application is organized into services, sub
 ## Server side
 
 In the context of developing a mobile application, the server-side implementation plays a crucial role in ensuring the seamless operation and efficient management of the application’s data. The server-side can be either a traditional back-end server, which is an application that can be written in a range of languages (Java, PHP, Python, Go, etc.), or a back-end as a service (BaaS) platform. The most popular providers when it comes to BaaS are: Google (Firebase), Amazon (AWS Amplify), built.io, etc.
+
+<br>
 
 # More info
 
