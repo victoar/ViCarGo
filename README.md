@@ -30,7 +30,7 @@ The architecture of a peer-to-peer car sharing mobile application involves sever
 It should be mentioned that a small part of the logic involving driving license validation is separately implemented in Python language and accessed with the help of an HTTP POST request.
 
 <p align="center">
-  <img src="https://github.com/victoar/ViCarGo/assets/72073154/ec3df194-99db-49ff-b8c4-15a797294524" alt="system-architecture" width="300" height="200">
+  <img src="https://github.com/victoar/ViCarGo/assets/72073154/ec3df194-99db-49ff-b8c4-15a797294524" alt="system-architecture" width="400" height="auto">
 </p>
 
 ## Client side
