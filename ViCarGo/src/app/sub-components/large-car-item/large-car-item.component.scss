@@ -1,0 +1,54 @@
+
+p{
+  margin: 0 0 0 3px;
+}
+
+::ng-deep ion-card {
+  border-radius: 20px;
+  margin-inline: 20px;
+}
+
+::ng-deep ion-card-header {
+  padding: 10px 0 0 16px;
+  //border-bottom: 1px solid grey;
+}
+
+.reviews-container{
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviews-text-style{
+  font-size: 16px;
+}
+
+.large-car-item-image{
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.delete-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 40px;
+  border-bottom-right-radius: 20px;
+  border-bottom: 1px solid grey;
+  border-right: 1px solid grey;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+  img{
+    width: 16px;
+    height: 16px;
+  }
+}
+
+

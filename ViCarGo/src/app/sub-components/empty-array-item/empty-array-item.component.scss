@@ -1,0 +1,32 @@
+.empty-array-container{
+  position: relative;
+  width: 90%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+  border-radius: 25px;
+  top: calc(50% - 100px);
+
+  img{
+    width: 300px;
+  }
+
+  p{
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+}
+
+.empty-array-container-big-img {
+  @extend .empty-array-container;
+  height: 110px;
+  top: calc(50% - 55px);
+
+  img{
+    width: 180px;
+  }
+}

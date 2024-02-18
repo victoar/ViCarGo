@@ -1,22 +1,54 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="logout()">
-        <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<div class="home-page-container">
+  <div class="home-page-header-container">
+    <div class="home-page-header">
+      <div class="user-location-details">
+        <p class="location-title">Your location:</p>
+        <p class="location-text">{{currentLocation}}</p>
+      </div>
+      <div class="user-profile-image">
+        <div class="profile-container" (click)="navigateToUserProfile()">
+          <img [style]="user && user.profileImage ? 'transform: scale(1)' : 'transform: scale(0.7)'" [src]="user && user.profileImage ? user.profileImage : 'assets/images/home-page/default-profile.png'">
+        </div>
+      </div>
+    </div>
   </div>
-</ion-content>
+
+  <div class="home-page-info-text">
+    Find the vehicle that suits you the most.
+  </div>
+
+  <div class="home-page-main-section-container">
+    <div class="search-bar-container" (click)="navigateToSearchPage()">
+      <img src="assets/images/icons/search-icon.svg" class="search-bar-icon">
+      <p>Search vehicle...</p>
+    </div>
+
+    <div class="top-brands-container">
+      <p class="section-title">Top Brands</p>
+<!--      <p class="section-click">See all</p>-->
+      <div class="scroll-wrapper">
+        <div (click)="navigateToSearchPageBrandFiltered(item)" *ngFor="let item of topBrandsList" class="scroll-item brand-list-item">
+          <img [src]="'./assets/images/car-brands-icons/' + item + '.png'">
+        </div>
+      </div>
+    </div>
+
+    <div class="nearby-cars-container">
+      <p class="section-title">Available Near You</p>
+      <p class="section-click" (click)="navigateToSearchPageUsingUserLocation()">See all</p>
+      <div class="scroll-wrapper">
+        <app-car-item class="scroll-item" *ngIf="carModels.length === 0 && !isLoading" [carItem]="carMock1" [isMock]="true"></app-car-item>
+        <app-car-item class="scroll-item" *ngIf="carModels.length === 0 && !isLoading" [carItem]="carMock2" [isMock]="true"></app-car-item>
+        <app-skeleton-text-car-item class="scroll-item" *ngIf="isLoading"></app-skeleton-text-car-item>
+        <app-skeleton-text-car-item class="scroll-item" *ngIf="isLoading"></app-skeleton-text-car-item>
+        <ng-container *ngIf="carModels.length > 0 && !isLoading">
+          <app-car-item class="scroll-item" *ngFor="let car of carModels"
+                        [carItem]="car"
+                        (click)="presentDetailsModal(car)"></app-car-item>
+        </ng-container>
+      </div>
+    </div>
+
+  </div>
+
+</div>

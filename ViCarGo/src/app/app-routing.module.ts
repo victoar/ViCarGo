@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AuthGuard, canActivate, redirectLoggedInTo, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['landing']);
 
 const routes: Routes = [
   {
@@ -12,9 +12,25 @@ const routes: Routes = [
       ...canActivate(redirectLoggedInToHome)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    path: 'landing',
+    loadChildren: () => import('./landing/landing.module').then( m => m.LandingPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'search-cars',
+    loadChildren: () => import('./search-cars/search-cars.module').then( m => m.SearchCarsPageModule)
+  },
+  {
+    path: 'favorites',
+    loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
+  },
+  {
+    path: 'chats',
+    loadChildren: () => import('./chats/chats.module').then( m => m.ChatsPageModule)
+  },
+  {
+    path: 'chat-room',
+    loadChildren: () => import('./chats/chat-room/chat-room.module').then( m => m.ChatRoomPageModule)
   },
   {
     path: '**',

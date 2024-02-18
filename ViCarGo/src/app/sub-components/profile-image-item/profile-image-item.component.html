@@ -1,0 +1,6 @@
+<div class="user-profile-image">
+  <div class="profile-container">
+    <img [style]="user && user.profileImage ? 'transform: scale(1)' : 'transform: scale(0.7)'" [src]="user && user.profileImage ? user.profileImage : 'assets/images/home-page/default-profile.png'">
+  </div>
+  <p>{{user && user.profileImage ? "Change profile picture" : "Choose a profile picture"}}</p>
+</div>

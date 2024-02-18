@@ -1,0 +1,183 @@
+@import "../../assets/styles/styles.css";
+
+.header-container{
+  position: relative;
+  //height: 15%;
+  width: 100%;
+}
+
+.logo-container{
+  position: relative;
+  height: auto;
+  width: auto;
+}
+
+.logo-container h2{
+  font-family: Roboto, serif;
+  font-weight: 900;
+  color: white;
+  margin-left: 5%;
+}
+
+#text-container{
+  position: absolute;
+  right: 5%;
+  top: 14vh;
+  //opacity: 1;
+  transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
+}
+
+#text-container.hidden{
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+#text-container h1{
+  font-family: Roboto, serif;
+  font-weight: 900;
+  color: white;
+  text-align: right;
+  font-size: 40px;
+}
+
+.login-page-container{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.login-page-container img{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+#background-image{
+  transition: filter 0.5s ease-in-out;
+}
+
+#background-image.blurred{
+  filter: blur(3.5px);
+}
+
+.login-page-buttons-container{
+  position: absolute;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 20px;
+}
+
+.login-button{
+  border-radius: 8px;
+  border: white 1px;
+  background-color: #0486C4;
+  opacity: 90%;
+  color: white;
+  width: 90%;
+  height: 40px;
+  font-family: Roboto, serif;
+  font-weight: 900;
+  margin-top: 10px;
+}
+
+.register-button{
+  @extend .login-button;
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.go-ahead-button{
+  @extend .login-button;
+  position: absolute;
+  bottom: 0;
+}
+
+#form-container{
+  position: relative;
+  height: 70%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 1s ease-in-out;
+  transform: translateY(150%);
+}
+
+#form-container.display{
+  transform: translateY(0);
+}
+
+.form-inputs-container{
+  position: absolute;
+  top: 20vh;
+  width: 70%;
+}
+
+.form-inputs-container h2{
+  font-family: Roboto, serif;
+  font-weight: 900;
+  color: white;
+}
+
+.login-input-field-container{
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  background: white;
+  opacity: 85%;
+  border-radius: 8px;
+}
+
+.login-input-field-container input{
+  width: 90%;
+  margin-left: 5%;
+  height: 40px;
+  opacity: 80%;
+  border-radius: 8px;
+  border: none;
+}
+
+.login-input-field-container input::placeholder{
+  font-family: Roboto, serif;
+  font-weight: 700;
+}
+
+.login-input-field-container input:focus{
+  outline: none;
+}
+
+.login-input-field-container img{
+  width: auto;
+  height: 25px;
+  position: absolute;
+  top: 7.5px;
+  right: 5px;
+}
+
+//.button-transition-enter {
+//  opacity: 0;
+//  transform: translateX(100%);
+//}
+//
+//.button-transition-enter-active {
+//  opacity: 1;
+//  transform: translateX(0);
+//  transition: opacity 300ms, transform 300ms;
+//}
+//
+//.button-transition-leave {
+//  opacity: 1;
+//  transform: translateX(0);
+//}
+//
+//.button-transition-leave-active {
+//  opacity: 0;
+//  transform: translateX(100%);
+//  transition: opacity 300ms, transform 300ms;
+//}

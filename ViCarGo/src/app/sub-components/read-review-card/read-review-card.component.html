@@ -1,0 +1,20 @@
+<ion-card>
+  <ion-card-content>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <ion-label>{{ userFirstName }}</ion-label>
+      </ion-col>
+      <ion-col class="ion-text-end">
+        <ion-note>{{ createdAt.toDate() | date: 'dd MMM yyyy' }}</ion-note>
+      </ion-col>
+    </ion-row>
+    <div class="star-rating">
+      <img [src]="isStarClicked[0] ? './assets/images/icons/star-filled.svg' : './assets/images/icons/star-outline.svg'">
+      <img [src]="isStarClicked[1] ? './assets/images/icons/star-filled.svg' : './assets/images/icons/star-outline.svg'">
+      <img [src]="isStarClicked[2] ? './assets/images/icons/star-filled.svg' : './assets/images/icons/star-outline.svg'">
+      <img [src]="isStarClicked[3] ? './assets/images/icons/star-filled.svg' : './assets/images/icons/star-outline.svg'">
+      <img [src]="isStarClicked[4] ? './assets/images/icons/star-filled.svg' : './assets/images/icons/star-outline.svg'">
+    </div>
+    <ion-textarea [readonly]="true" [(ngModel)]="text"></ion-textarea>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Filters</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="resetModal()">Reset</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [class.filter-container-ios]="isIOS"
+       [class.filter-container-android]="!isIOS">
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Area</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label style="text-align: right">Within {{ filterDistance }} km</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-range
+            min="1"
+            max="30"
+            step="1"
+            [(ngModel)]="filterDistance">
+          </ion-range>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Price</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label style="text-align: right">
+              {{ "€" + filterPrice.lower + " - " + "€" + (filterPrice.upper === 200 ? (filterPrice.upper + "+") : filterPrice.upper) + "/day"}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-range
+            dual-knobs="true"
+            min="10"
+            max="200"
+            step="5"
+            [(ngModel)]="filterPrice">
+          </ion-range>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <div>
+      <ion-item id="open-start-date-modal">
+        <ion-label>Start date</ion-label>
+        <ion-input slot="end" [(ngModel)]="formattedStartDateValue"></ion-input>
+      </ion-item>
+
+      <ion-item id="open-end-date-modal">
+        <ion-label>End date</ion-label>
+        <ion-input slot="end" [(ngModel)]="formattedEndDateValue"
+                   [disabled]="!startDateValue"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Make</ion-label>
+        <ion-select [(ngModel)]="brandSelection">
+          <ion-select-option *ngFor="let carBrand of carBrands" [value]="carBrand.name">{{carBrand.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Newer than</ion-label>
+        <ion-select [(ngModel)]="yearSelection">
+          <ion-select-option *ngFor="let year of years" [value]="year" >{{year}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Transmission</ion-label>
+        <ion-select [(ngModel)]="transmissionSelection">
+          <ion-select-option *ngFor="let transmission of transmissionTypes" [value]="transmission" >{{transmission}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <button class="submit-filters-button" (click)="showNewResults()">
+      Show results
+    </button>
+  </div>
+
+  <ion-modal class="centered-blur-modal" trigger="open-start-date-modal">
+    <ng-template>
+      <ion-content>
+        <ion-datetime
+          #datetime
+          [value]="startDateValue"
+          [min]="now"
+          size="cover"
+          (ionChange)="startDateChanged(datetime.value)"
+          show-default-buttons="true">
+        </ion-datetime>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal class="centered-blur-modal" trigger="open-end-date-modal">
+    <ng-template>
+      <ion-content>
+        <ion-datetime
+          #datetime
+          [value]="endDateValue"
+          [min]="startDateValue"
+          size="cover"
+          (ionChange)="endDateChanged(datetime.value)"
+          show-default-buttons="true">
+        </ion-datetime>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

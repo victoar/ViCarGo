@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reviews</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <app-read-review-card *ngFor="let review of reviews" [rating]="review.rating" [userFirstName]="review.userFirstName" [text]="review.text" [createdAt]="review.createdAt"></app-read-review-card>
+  </ion-list>
+</ion-content>

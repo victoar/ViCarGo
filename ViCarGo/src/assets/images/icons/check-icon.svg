@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27">
+  <g id="Group_185" data-name="Group 185" transform="translate(-1099 -1735)">
+    <g id="Group_157" data-name="Group 157" transform="translate(1108.281 1743.438)">
+      <line id="Line_9" data-name="Line 9" y1="8.867" x2="6.776" transform="translate(3.456)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1"/>
+      <line id="Line_10" data-name="Line 10" x1="3.286" y1="4.322" transform="translate(0 4.545)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1"/>
+    </g>
+    <g id="Group_180" data-name="Group 180" transform="translate(1099 1735)">
+      <g id="Ellipse_20" data-name="Ellipse 20" fill="none" stroke="#707070" stroke-width="1">
+        <circle cx="13.5" cy="13.5" r="13.5" stroke="none"/>
+        <circle cx="13.5" cy="13.5" r="13" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

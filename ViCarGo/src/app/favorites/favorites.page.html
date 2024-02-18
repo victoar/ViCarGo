@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="(favoriteCarsByUser | async) as cars; else skeletonTemplate">
+    <app-empty-array-item *ngIf="cars.length === 0" [displayText]="'No cars available'" [imagePath]="'assets/images/home-page/sample-car-when-empty.png'"></app-empty-array-item>
+
+    <ng-container *ngIf="cars.length > 0">
+      <app-large-car-item *ngFor="let car of cars" [carItem]="car" (click)="openCarDetailsPopup(car)" [showFavoriteButton]="true" [isFavorite]="true"></app-large-car-item>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #skeletonTemplate>
+    <app-skeleton-text-large-car-item></app-skeleton-text-large-car-item>
+  </ng-template>
+</ion-content>

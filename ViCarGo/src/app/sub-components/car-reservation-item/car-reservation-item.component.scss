@@ -1,0 +1,26 @@
+ion-item{
+  --inner-border-width: 0;
+}
+
+ion-card-content{
+  padding-bottom: 5px;
+}
+
+#confirm-button{
+  --color: var(--primary-color);
+}
+
+#review-saved-label{
+  --color: var(--primary-color);
+}
+
+.reservation-accepted{
+  --color: var(--primary-color);
+}
+
+#leave-review-button{
+  --background: var(--primary-color);
+  --background-hover: var(--primary-color);
+  --background-activated: var(--primary-color);
+  --background-focused: var(--primary-color);
+}

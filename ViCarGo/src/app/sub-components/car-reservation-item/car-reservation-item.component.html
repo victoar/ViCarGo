@@ -1,0 +1,72 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>{{ reservation.price + "€" + "/day" }}</ion-card-subtitle>
+    <ion-card-title>{{ reservation.brand }} {{ reservation.model }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-label>
+      Start Date: {{ reservation.startDate.toDate() | date:'HH:mm, MMM d, yyyy' }}
+    </ion-label>
+    <br>
+    <ion-label>
+      End Date: {{ reservation.endDate.toDate() | date:'HH:mm, MMM d, yyyy' }}
+    </ion-label>
+  </ion-card-content>
+
+  <ng-container *ngIf="isFromCarRequests; else isFromMyTrips">
+    <ng-container *ngIf="reservation.status === 'PENDING'">
+      <ion-button fill="clear" id="confirm-button" (click)="confirmReservation(reservation)">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        Confirm
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="declineReservation(reservation)">
+        <ion-icon name="close-circle-outline"></ion-icon>
+        Decline
+      </ion-button>
+    </ng-container>
+    <ng-container *ngIf="reservation.status === 'ACCEPTED'">
+      <ion-item>
+        <ion-label class="reservation-accepted">Reservation accepted</ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="reservation.status === 'DECLINED'">
+      <ion-item>
+        <ion-label color="danger">Reservation declined</ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="reservation.status === 'COMPLETED'">
+      <ion-item>
+        <ion-label>Reservation completed</ion-label>
+      </ion-item>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #isFromMyTrips>
+    <ng-container *ngIf="reservation.status === 'PENDING'">
+      <ion-item>
+        <ion-label>Reservation in pending</ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="reservation.status === 'ACCEPTED'">
+      <ion-item>
+        <ion-label class="reservation-accepted">Owner accepted. Be there on time!</ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="reservation.status === 'DECLINED'">
+      <ion-item>
+        <ion-label color="danger">Reservation declined by owner</ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="reservation.status === 'COMPLETED'">
+      <ion-item>
+        <ion-label>Trip completed</ion-label>
+        <ion-button *ngIf="!reservation.isReviewed" id="leave-review-button" (click)="leaveReview(reservation)">
+          Leave a review
+        </ion-button>
+        <ion-label id="review-saved-label" *ngIf="reservation.isReviewed" slot="end">Review saved</ion-label>
+      </ion-item>
+    </ng-container>
+  </ng-template>
+
+</ion-card>

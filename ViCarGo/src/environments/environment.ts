@@ -11,7 +11,8 @@ export const environment = {
     messagingSenderId: "1003406351513",
     appId: "1:1003406351513:web:7f0f927a2df4d7445d6c08"
   },
-  production: false
+  production: false,
+  googleCloudVision: "AIzaSyBzVZO5MpwN78Fx8Kebc9aTvrLG8DEjiyY"
 };
 
 /*

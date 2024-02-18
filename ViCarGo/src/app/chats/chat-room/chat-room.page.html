@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/landing/chats"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chat with {{receiverFirstName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-empty-array-item *ngIf="(chats | async)?.length === 0"
+                        [isBigImage] = "true"
+                        [displayText]="getEmptyArrayMessage()"
+                        [imagePath]="'assets/images/icons/waving-icon.png'"></app-empty-array-item>
+
+  <ng-container *ngIf="(chats | async) as chat$">
+    <ion-list
+      lines="none"
+      *ngIf="chat$?.length > 0">
+      <ion-item-group class="chats-group" *ngFor="let chat of chat$">
+        <chat-item [chat]="chat" [userId]="chatService.currentUserId"></chat-item>
+      </ion-item-group>
+    </ion-list>
+  </ng-container>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-textarea
+      autoGrow
+      rows="1"
+      placeholder="Send message"
+      class="ion-text-start"
+      [(ngModel)]="message">
+    </ion-textarea>
+    <ion-buttons slot="end">
+      <ion-fab-button *ngIf="!isLoading" size="small" (click)="sendMessage()">
+        <ion-icon name="send"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="isLoading" size="small">
+        <ion-spinner name="crescent" color="white"></ion-spinner>
+      </ion-fab-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

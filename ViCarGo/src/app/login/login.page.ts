@@ -3,20 +3,32 @@ import {AuthService} from "../services/auth.service";
 import {AlertController, LoadingController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserService} from "../services/user.service";
+// import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  // animations: [trigger('buttonTransition', [
+  //   state('void', style({ opacity: 0, transform: 'translateX(100%)' })),
+  //   transition(':enter', animate('300ms ease-in-out')),
+  //   transition(':leave', animate('300ms ease-in-out'))
+  // ])]
 })
 export class LoginPage implements OnInit {
   credentials: FormGroup;
+  showSignInButtons: boolean = false;
+  registerFormVisible = false;
+
+  buttonTransitionState: 'void' | 'enter' | 'leave' = 'void';
 
   constructor(private authService: AuthService,
               private loadingController: LoadingController,
               private router: Router,
               private formBuilder: FormBuilder,
-              private alertController: AlertController) { }
+              private alertController: AlertController,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.initFormGroup();
@@ -25,7 +37,9 @@ export class LoginPage implements OnInit {
   initFormGroup() {
     this.credentials = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]]
     });
   }
 
@@ -37,6 +51,14 @@ export class LoginPage implements OnInit {
     return this.credentials.get('password');
   }
 
+  get firstName() {
+    return this.credentials.get('firstName');
+  }
+
+  get lastName() {
+    return this.credentials.get('lastName');
+  }
+
   async register() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -44,12 +66,17 @@ export class LoginPage implements OnInit {
     await this.authService.register(this.credentials.value)
       .then((user) => {
         loading.dismiss();
-        console.log(user);
-        this.router.navigate(['home'], {replaceUrl: true});
+        this.userService.setCurrentUser(this.authService.getId());
+        this.router.navigate(['landing'], {replaceUrl: true});
       })
       .catch((error) => {
         loading.dismiss();
-        this.showAlert('Registration failed', 'Please try again!');
+        console.log(error.message);
+        if(error.message.includes('email-already-in-use')) {
+          this.showAlert('Registration failed', 'There is already an existing account with these credentials!');
+        } else {
+          this.showAlert('Registration failed', 'Please try again!');
+        }
       })
   }
 
@@ -61,7 +88,8 @@ export class LoginPage implements OnInit {
       .then((user) => {
         loading.dismiss();
         console.log(user);
-        this.router.navigate(['home'], {replaceUrl: true});
+        this.userService.setCurrentUser(this.authService.getId());
+        this.router.navigate(['landing'], {replaceUrl: true});
       })
       .catch((error) => {
         loading.dismiss();
@@ -76,5 +104,27 @@ export class LoginPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  showSignInButtonsOnClick() {
+    this.showSignInButtons = true;
+    const descriptiveText = document.getElementById('text-container') as HTMLDivElement;
+    const backgroundImage = document.getElementById('background-image') as HTMLImageElement;
+    const formDiv = document.getElementById('form-container') as HTMLDivElement
+    descriptiveText.classList.toggle('hidden');
+    backgroundImage.classList.toggle('blurred');
+    formDiv.classList.toggle('display');
+  }
+
+  showRegisterForm() {
+    // this.credentials.get('lastName').enable();
+    // this.credentials.get('firstName').enable();
+    this.registerFormVisible = true;
+  }
+
+  cancelRegister() {
+    this.registerFormVisible = false;
+    // this.credentials.get('lastName').disable();
+    // this.credentials.get('firstName').disable();
   }
 }

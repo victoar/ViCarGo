@@ -1,0 +1,113 @@
+<!--<ion-toolbar>-->
+<!--  <ion-buttons slot="end">-->
+<!--    <ion-button (click)="closeModal()">Close</ion-button>-->
+<!--  </ion-buttons>-->
+<!--</ion-toolbar>-->
+
+<ion-content>
+  <div class="modal-container">
+  <div class="modal-image-container">
+    <ion-slides pager="true">
+      <ion-slide *ngFor="let carImage of carModel.carImages">
+        <img [src]="carImage">
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="details-container">
+    <div class="overall-details">
+      <h4>{{carModel.brand + " " + carModel.model}}</h4>
+      <div *ngIf="carModel.reviewRating; else noReviews">
+        <img class="review-star-icon" src="assets/images/icons/star.png">
+        <p class="stick-to-left">{{(carModel.reviewRating / carModel.reviewNumber).toFixed(1)}}</p>
+        <p class="stick-to-left secondary-text" (click)="seeCarReviews(carModel.id)">{{"(" + carModel.reviewNumber + " reviews)"}}</p>
+      </div>
+      <ng-template #noReviews>
+        <p>No reviews yet</p>
+      </ng-template>
+    </div>
+
+    <div class="car-location">
+      <ion-icon name="location-sharp" size="large"></ion-icon>
+      <p>{{carModel.locationAddress}}</p>
+    </div>
+
+    <div class="user-details">
+      <div class="profile-container">
+        <img [style]="carOwner && carOwner.profileImage ? 'transform: scale(1)' : 'transform: scale(0.7)'"
+             [src]="carOwner && carOwner.profileImage ? carOwner .profileImage : 'assets/images/home-page/default-profile.png'">
+      </div>
+
+      <div class="user-name-container">
+        <p>{{carOwner ? (carOwner.firstName + " " + carOwner.lastName) : "John Doe"}}</p>
+        <p style="font-size: 12px">Renter</p>
+      </div>
+
+      <div class="profile-container stick-to-right" (click)="dialNumberOnClick()">
+        <img src="assets/images/icons/phone-call.png">
+      </div>
+
+      <div style="width: 5px"></div>
+
+      <div class="profile-container stick-to-right" (click)="sendMessageOnClick()">
+        <img src="assets/images/icons/message.png">
+      </div>
+
+    </div>
+
+    <div class="car-info-container">
+      <h5>Car info</h5>
+      <div class="car-details">
+        <div class="row">
+          <div class="cell">
+            <img src="assets/images/icons/person.png" alt="Icon 1">
+            <span>{{carModel.passengers + " passengers"}}</span>
+          </div>
+          <div class="cell">
+            <img src="assets/images/icons/calendar.png" alt="Icon 2">
+            <span>{{carModel.year}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <img src="assets/images/icons/gear.png" alt="Icon 3">
+            <span>{{carModel.transmission}}</span>
+          </div>
+          <div class="cell">
+            <img src="assets/images/icons/gas-station.png" alt="Icon 4">
+            <span>Full to full</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="car-specs-container">
+      <div class="car-spec-item">
+        <p>Avg. cons.</p>
+        <span>{{carModel.consumption}}</span>
+        <span class="lowercase-info">l/100</span>
+      </div>
+      <div class="car-spec-item">
+        <p>Max. power</p>
+        <span>{{carModel.horsepower}}</span>
+        <span class="lowercase-info">hp</span>
+      </div>
+      <div class="car-spec-item">
+        <p>Top speed</p>
+        <span>{{carModel.speed}}</span>
+        <span class="lowercase-info">km/h</span>
+      </div>
+    </div>
+
+    <ion-button id="open-reservation-modal" >
+      Make a reservation
+    </ion-button>
+  </div>
+</div>
+
+  <ion-modal class="centered-blur-modal" trigger="open-reservation-modal">
+    <ng-template>
+      <app-reservation-modal [userId]="userId" [ownerId]="carOwner.uid" [carModel]="carModel"></app-reservation-modal>
+    </ng-template>
+  </ion-modal>
+</ion-content>

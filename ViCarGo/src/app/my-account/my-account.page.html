@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item (click)="navigateTo('/landing/account/user-details')">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-label>My Profile</ion-label>
+    </ion-item>
+
+    <ion-item (click)="navigateTo('/landing/account/user-cars')">
+      <ion-icon name="car-outline" slot="start"></ion-icon>
+      <ion-label>My Vehicles</ion-label>
+    </ion-item>
+
+    <ion-item (click)="navigateTo('/landing/account/user-trips')">
+      <ion-icon name="trail-sign-outline" slot="start"></ion-icon>
+      <ion-label>My Trips</ion-label>
+    </ion-item>
+
+    <ion-item (click)="navigateTo('/landing/account/user-car-requests')">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-label>My Car Requests</ion-label>
+    </ion-item>
+
+    <ion-item (click)="logout()">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      <ion-label>Sign Out</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

@@ -1,23 +1,61 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="login-page-container">
+  <img src="assets/images/welcome-page.png" id="background-image">
 
-<ion-content class="ion-padding">
-  <form [formGroup]="credentials">
+  <div class="header-container">
+    <div class="logo-container">
+      <h2>ViCarGo</h2>
+    </div>
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-      <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Email is invalid</ion-note>
-    </ion-item>
+    <div id="text-container">
+      <h1>"Don't<br>sit at home.<br>Go for a ride!"</h1>
+    </div>
+  </div>
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-      <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">Password must to be at least 6 characters</ion-note>
-    </ion-item>
+  <div id="form-container">
+    <div *ngIf="showSignInButtons" class="form-inputs-container" [formGroup]="credentials">
 
-    <ion-button expand="full" type="button" [disabled]="!credentials.valid" (click)="login()">Login</ion-button>
-    <ion-button expand="full" type="button" (click)="register()">Register</ion-button>
-  </form>
-</ion-content>
+      <h2>Sign in</h2>
+
+      <div class="login-input-field-container">
+        <input type="email" placeholder="Email" formControlName="email">
+        <img *ngIf="email.touched || email.dirty" [src]="(email.dirty || email.touched) && email.errors ?
+          'assets/images/icons/cross-icon-red.svg' :
+          'assets/images/icons/check-icon-blue.svg'">
+      </div>
+
+      <ng-container *ngIf="registerFormVisible">
+        <div class="login-input-field-container">
+          <input type="text" placeholder="First Name" formControlName="firstName">
+          <img *ngIf="firstName.touched || firstName.dirty" [src]="(firstName.dirty || firstName.touched) && firstName.errors ?
+          'assets/images/icons/cross-icon-red.svg' :
+          'assets/images/icons/check-icon-blue.svg'">
+        </div>
+
+        <div class="login-input-field-container">
+          <input type="text" placeholder="Last name" formControlName="lastName">
+          <img *ngIf="lastName.touched || lastName.dirty" [src]="(lastName.dirty || lastName.touched) && lastName.errors ?
+          'assets/images/icons/cross-icon-red.svg' :
+          'assets/images/icons/check-icon-blue.svg'">
+        </div>
+      </ng-container>
+
+      <div class="login-input-field-container">
+        <input type="password" placeholder="Password" formControlName="password">
+        <img *ngIf="password.touched || password.dirty" [src]="(password.dirty || password.touched) && password.errors ?
+          'assets/images/icons/cross-icon-red.svg' :
+          'assets/images/icons/check-icon-blue.svg'">
+      </div>
+    </div>
+  </div>
+
+  <div class="login-page-buttons-container">
+    <button *ngIf="showSignInButtons && !registerFormVisible" class="login-button" (click)="login()">Login</button>
+    <button *ngIf="showSignInButtons && !registerFormVisible" class="register-button" (click)="showRegisterForm()">Register</button>
+    <button *ngIf="!showSignInButtons" class="go-ahead-button" (click)="showSignInButtonsOnClick()">Let's go</button>
+  </div>
+
+  <div class="login-page-buttons-container" [@buttonTransition]="buttonTransitionState" *ngIf="registerFormVisible">
+    <button class="login-button" (click)="cancelRegister()">Back to Login</button>
+    <button class="register-button" (click)="register()">Sign in</button>
+  </div>
+</div>

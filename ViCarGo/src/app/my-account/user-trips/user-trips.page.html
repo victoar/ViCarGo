@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/landing/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Trips</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="segmentSelection">
+    <ion-segment-button value="upcoming">
+      Upcoming
+    </ion-segment-button>
+    <ion-segment-button value="past">
+      Past
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list *ngIf="segmentSelection === 'upcoming' && reservations.length > 0">
+    <app-car-reservation-item *ngFor="let reservation of reservations" [reservation]="reservation" [isFromCarRequests]="false"></app-car-reservation-item>
+  </ion-list>
+  <app-empty-array-item *ngIf="segmentSelection === 'upcoming' && reservations.length === 0" [displayText]="'No upcoming trips'" [isBigImage]="true" [imagePath]="'./assets/images/icons/trip-icon.png'"></app-empty-array-item>
+
+  <ion-list *ngIf="segmentSelection === 'past' && pastReservations.length > 0">
+    <app-car-reservation-item *ngFor="let reservation of pastReservations" [reservation]="reservation" [isFromCarRequests]="false"></app-car-reservation-item>
+  </ion-list>
+  <app-empty-array-item *ngIf="segmentSelection === 'past' && pastReservations.length === 0" [displayText]="'No past reservations'" [isBigImage]="true" [imagePath]="'./assets/images/icons/request-icon.png'"></app-empty-array-item>
+
+</ion-content>

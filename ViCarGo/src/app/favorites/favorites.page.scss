@@ -1,0 +1,31 @@
+.empty-array-container{
+  position: relative;
+  width: 90%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+  //background-color: var(--primary-color);
+  border-radius: 25px;
+  //border: 2px solid var(--primary-color);
+  top: calc(50% - 100px);
+
+  img{
+    width: 300px;
+  }
+
+  p{
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+}
+
+.cars-container{
+  position: relative;
+  height: auto;
+  width: 100%;
+  //margin-bottom: 40px;
+}
